@@ -1,11 +1,13 @@
 <script setup>
 // import TheWelcome from '@/components/TheWelcome.vue'
-import WelcomeMenu from '@/components/WelcomeMenu.vue'
+import Welcome from '@/components/Welcome.vue'
+import Aboutus from '@/components/Aboutus.vue'
 </script>
 
 <template>
   <main>
     <!-- <TheWelcome /> -->
-    <WelcomeMenu />
+    <Welcome />
+    <Aboutus />
   </main>
 </template>
