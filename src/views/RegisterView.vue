@@ -1,8 +1,27 @@
+<script>
+import { RouterLink, RouterView } from 'vue-router'
+import NavBarHomeVue from "../components/NavBarHome.vue";
+export default {
+    components: {
+        RouterLink,
+        RouterView,
+        NavBarHomeVue
+    },
+    data() {
+        return {
+            count: 0,
+            email: null,
+            password: null
+        };
+    },
+}
+</script>
 <template>
-    <div class="container">
+    <NavBarHomeVue />
+    <div class="container d-flex">
         <form @submit="RegisterForm" method="post">
 
-            <div class="container">
+            <div class="container ">
                 <label for="uname"><b>Email Address</b></label>
                 <input type="email" placeholder="Email Address" v-model="email" required>
 
@@ -29,17 +48,7 @@
     </div>
 </template>
 
-<script>
-export default {
-    data() {
-        return {
-            count: 0,
-            email: "",
-            password: null
-        }
-    }
-}
-</script>
+
 
 <style>
 </style>
