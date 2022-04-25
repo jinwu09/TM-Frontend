@@ -4,16 +4,19 @@ import HelloWorld from '@/components/HelloWorld.vue'
 </script>
 <template>
   <header>
-      <div class="flex center">
-        <img src="@/assets/Logo2.jpg" class="logo" width="100" height="100">
-        <h1>Today's Menu</h1>
-      </div>
-      <nav>
-        <RouterLink to="/Login" class="link">Login</RouterLink>
-        <button class="button"><RouterLink to="/singup">Register</RouterLink></button>
-      </nav>
+    <div class="flex center">
+      <img src="@/assets/Logo2.jpg" class="logo" width="100" height="100">
+      <h1>Today's Menu</h1>
+    </div>
+    <nav>
+      <router-link to="home">Home</router-link>
+      <RouterLink to="/Login" class="link">Login</RouterLink>
+      <button class="button">
+        <RouterLink to="/register">Register</RouterLink>
+      </button>
+    </nav>
   </header>
-<hr>
+  <hr>
   <RouterView />
 </template>
 
@@ -24,22 +27,27 @@ import HelloWorld from '@/components/HelloWorld.vue'
   /* max-width: max-content; */
   /* margin: 0 auto; */
   /* padding: 2rem; */
-  
+
   font-weight: normal;
 }
+
 header {
   line-height: 1.5;
   max-height: 100vh;
 }
-header h1{
+
+header h1 {
   width: auto;
 }
-.flex{
+
+.flex {
   display: flex;
 }
-.center{
+
+.center {
   place-items: center;
 }
+
 .logo {
   display: block;
   margin: 0 auto 2rem;
@@ -52,7 +60,8 @@ header h1{
     background-color: hsla(160, 100%, 37%, 0.2);
   }
 }
-.button{
+
+.button {
   border-radius: 10px;
   background-color: white;
   transition: all 0.5s;
@@ -71,12 +80,14 @@ nav a.router-link-exact-active {
 nav a.router-link-exact-active:hover {
   background-color: transparent;
 }
-.button:hover{
+
+.button:hover {
   background-color: hsla(160, 100%, 37%, 0.2);
 }
+
 nav a {
   display: inline-block;
-  padding:  1rem;
+  padding: 1rem;
   border-left: 1px solid var(--color-border);
   text-decoration: none;
   color: black;
@@ -104,7 +115,7 @@ nav a:first-of-type {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
-    padding: 0 calc(var(--section-gap) / 2) ;
+    padding: 0 calc(var(--section-gap) / 2);
     padding-top: 1rem;
   }
 

@@ -25,13 +25,13 @@
 
 .content-size-100-600 {
     width: 100%;
-    height: 600px;
+    height: 700px;
 }
 
 .content {
     position: absolute;
     color: white;
-    transform: translateY(50%);
+    transform: translateY(75%);
     width: 500px;
     word-spacing: 1px;
     text-align: center;
