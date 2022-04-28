@@ -1,9 +1,25 @@
-<script setup>
-import TheWelcome from '@/components/TheWelcome.vue'
+
+<script>
+import { RouterLink, RouterView } from 'vue-router'
+import WelcomeVue from '../components/Welcome.vue'
+import Aboutus from '../components/Aboutus.vue'
+import NavBarHomeVue from '../components/NavBarHome.vue'
+export default {
+  components: {
+    RouterLink,
+    RouterView,
+    WelcomeVue,
+    Aboutus,
+    NavBarHomeVue
+  }
+}
 </script>
 
 <template>
+  <NavBarHomeVue />
+
   <main>
-    <TheWelcome />
+    <WelcomeVue />
+    <Aboutus />
   </main>
 </template>
