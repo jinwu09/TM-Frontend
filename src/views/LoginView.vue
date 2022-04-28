@@ -37,7 +37,7 @@ export default {
 
 
         <div class=" text-center ">
-          <button class="linkbutton w-3/4 shadow-xl" type="submit">Login</button>
+          <button class="linkbutton w-3/4 bg-primary border-0 hover:bg-third " type="submit">Login</button>
         </div>
         <div class="pt-5 text-center">
           <span class="psw">

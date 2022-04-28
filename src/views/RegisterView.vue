@@ -41,7 +41,7 @@ export default {
             </div>
 
             <div class="text-center">
-                <button class="linkbutton w-3/4 shadow-xl" type="submit">Register</button>
+                <button class="linkbutton w-3/4  bg-primary border-0 hover:bg-third " type="submit">Register</button>
             </div>
             <div class="text-center pt-4">
                 <RouterLink to="/Login" class="linktext  w-3/4">Already have an Account</RouterLink>
