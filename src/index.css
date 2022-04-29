@@ -24,4 +24,31 @@
     .input{
         @apply border rounded-xl focus:outline-none focus:ring-1 focus:ring-secondary focus:text-primary px-3 py-2 transition-all duration-200 ;
     }
+    /* Sidebar */
+        /* toggle feature */
+    .SideActive{
+        @apply w-64 ;
+    }
+    .SideDisable{
+        @apply w-0 ;
+    }
+    .SideActivemain {
+        @apply ml-64;
+    }
+    
+    .SideDisablemain {
+        @apply ml-0;
+    }
+        /* Toggle Feature End  */
+
+    .main{
+        @apply transition-all duration-200
+    }
+    .SideBar{
+        @apply flex flex-col fixed bg-secondary h-full overflow-x-hidden transition-all duration-200;
+    }
+    .SideBarIcon{
+        @apply  w-64 my-2 px-5 ; 
+    }
+    /* SideBar END */
 }
