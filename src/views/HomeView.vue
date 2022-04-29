@@ -1,3 +1,4 @@
+
 <script>
 import { RouterLink, RouterView } from 'vue-router'
 import WelcomeVue from '../components/Welcome.vue'

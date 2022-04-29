@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components{
+
+    .test{
+        @apply border-2 border-solid border-black
+    }
+     /* nav a.router-link-exact-active {
+        @apply color: var(--color-text);
+    }
+    
+    nav a.router-link-exact-active:hover {
+        @apply background-color: transparent;
+    } */
+    .linkbutton{
+        @apply p-2 border-2 rounded-3xl hover:rounded-xl hover:bg-third transition-all duration-300 ease-linear cursor-pointer hover:text-primary text-lg ;
+
+    }
+    .linktext{
+        @apply text-third hover:text-primary transition-all duration-300;
+    }
+    .input{
+        @apply border rounded-xl focus:outline-none focus:ring-1 focus:ring-secondary focus:text-primary px-3 py-2 transition-all duration-200 ;
+    }
+}
