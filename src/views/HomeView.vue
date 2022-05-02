@@ -11,6 +11,8 @@ export default {
 </script>
 
 <template>
+  <NavBarHomeVue />
+
   <main>
     <!-- <TheWelcome /> -->
     <WelcomeVue />
