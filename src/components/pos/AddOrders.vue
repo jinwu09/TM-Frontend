@@ -38,15 +38,15 @@ export default {
     <div class="grid grid-cols-2">
         <!-- left side current order list -->
         <div class="border-2 mx-3 my-2">
-            <div class="grid grid-cols-2" v-for="Order in ActiveOrders()" v-bind:key="Order">
-                <div class="flex flex-col">
-                    <h1>{{ Order.name }}</h1>
-                    <p> {{ Order.price }} </p>
+            <div class="flex flex-row" v-for="Order in ActiveOrders()" v-bind:key="Order">
+                <div class="flex flex-col w-[93%]">
+                    <h1 class="text-2xl">{{ Order.name }}</h1>
+                    <p>&#8369; {{ Order.price }} </p>
                 </div>
-                <div class=" flex ">
-                    <button @click="Order.quantity--">-</button>
-                    <p> {{ Order.quantity }} </p>
-                    <button @click="Order.quantity++">+</button>
+                <div class=" flex m-auto test ">
+                    <button class="linkbutton " @click="Order.quantity--">-</button>
+                    <p class="text-center my-auto"> {{ Order.quantity }} </p>
+                    <button class="linkbutton" @click="Order.quantity++">+</button>
                 </div>
             </div>
         </div>
