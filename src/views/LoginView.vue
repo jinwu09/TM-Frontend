@@ -1,5 +1,19 @@
-<script setup>
+<script>
 import { RouterLink, RouterView } from 'vue-router'
+
+export default{
+    components:{
+        RouterLink,
+        RouterView
+    },
+    data() {
+        return {
+            count: 0,
+            email: null,
+            password: null
+        }
+    }
+}
 
 </script>
 <template>
@@ -30,18 +44,5 @@ import { RouterLink, RouterView } from 'vue-router'
         </form>
     </div>
 </template>
-
-<script>
-export default {
-    data() {
-        return {
-            count: 0,
-            email: null,
-            password: null
-        }
-    }
-}
-</script>
-
 <style>
 </style>

@@ -1,13 +1,19 @@
-<script setup>
-// import TheWelcome from '@/components/TheWelcome.vue'
-import Welcome from '@/components/Welcome.vue'
-import Aboutus from '@/components/Aboutus.vue'
+<script>
+import WelcomeVue from '../components/Welcome.vue'
+import AboutusVue from '../components/Aboutus.vue'
+
+export default {
+  components:{
+    WelcomeVue,
+    AboutusVue
+  },
+}
 </script>
 
 <template>
   <main>
     <!-- <TheWelcome /> -->
-    <Welcome />
-    <Aboutus />
+    <WelcomeVue />
+    <AboutusVue />
   </main>
 </template>
