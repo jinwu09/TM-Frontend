@@ -1,6 +1,7 @@
 <script >
 import { RouterLink, RouterView } from 'vue-router'
 import NavBarHomeVue from '../components/NavBarHome.vue'
+import axios from 'axios'
 export default {
   components: {
     RouterLink,
@@ -9,8 +10,18 @@ export default {
   },
   data() {
     return {
-      email: null,
+      username: null,
       password: null
+    }
+  },
+  methods: {
+    login() {
+      axios.post("http://127.0.0.1:8000/api/auth/token/login/",
+        {
+          password: this.password,
+          username: this.username
+        }
+      ).then((res) => { console.log(res.data) }).catch((err) => { console.log(err) })
     }
   }
 }
@@ -19,11 +30,11 @@ export default {
   <NavBarHomeVue />
   <div class="  ">
     <div class="mx-auto w-1/3 my-40  shadow-2xl rounded-xl pb-3">
-      <form @submit="LoginForm" method="post">
+      <form @submit.prevent="login">
 
         <div class=" grid grid-cols-1  p-14 pb-4 ">
-          <label for="uname"><b>Email Address</b></label>
-          <input class="input" type="email" placeholder="Email Address" v-model="email" required>
+          <label for="uname"><b>Username</b></label>
+          <input class="input" type="text" placeholder="Username" v-model="username" required>
 
           <label for="psw" class=" pt-3 "><b>Password</b></label>
           <input class="input" type="password" placeholder="Enter Password" v-model="password" required>
