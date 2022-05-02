@@ -1,20 +1,21 @@
 <script>
 import WelcomeVue from '../components/Welcome.vue'
 import AboutusVue from '../components/Aboutus.vue'
+import NavBarHome from '../components/NavBarHome.vue'
 
 export default {
   components:{
     WelcomeVue,
-    AboutusVue
+    AboutusVue,
+    NavBarHome
   },
 }
 </script>
 
 <template>
-  <NavBarHomeVue />
+  <NavBarHome/>
 
   <main>
-    <!-- <TheWelcome /> -->
     <WelcomeVue />
     <AboutusVue />
   </main>
