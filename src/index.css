@@ -39,6 +39,9 @@
     .SideDisablemain {
         @apply ml-0;
     }
+    .Active{
+        @apply  bg-third rounded-xl !important
+    }
         /* Toggle Feature End  */
 
     .main{
