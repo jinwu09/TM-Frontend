@@ -35,9 +35,6 @@ export default {
                 <label for="psw"><b>Reapeat Password</b></label>
                 <input class="input" type="password" placeholder="Enter Password" v-model="repeatpassword" required>
 
-                <label>
-                    <input type="checkbox" name="remember"> Terms of Agreement
-                </label>
             </div>
 
             <div class="text-center">
