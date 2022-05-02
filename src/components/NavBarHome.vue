@@ -9,7 +9,7 @@ import { RouterLink, RouterView } from 'vue-router'
             <h1 class="my-auto">Today's Menu</h1>
         </div>
         <nav class=" flex ml-auto gap-5  my-auto">
-            <RouterLink to="/home#home" class=" linkbutton current ">Home</RouterLink>
+            <RouterLink to="/home#home" class=" linkbutton  current ">Home</RouterLink>
             <RouterLink to="/Login" class=" linkbutton current">Login</RouterLink>
             <RouterLink to="/register" class=" linkbutton current">Register</RouterLink>
         </nav>
