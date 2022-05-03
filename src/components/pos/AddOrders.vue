@@ -6,16 +6,21 @@ export default {
                 { category_id: 1, company_id: 1, name: 'Food' },
                 { category_id: 2, company_id: 1, name: 'Drinks' },
             ],
-            Products: [
-                { product_id: 1, category_id: 1, company_id: 1, name: 'Burger', price: 46 },
-                { product_id: 2, category_id: 2, company_id: 1, name: 'coke', price: 46 },
-                { product_id: 3, category_id: 2, company_id: 1, name: 'sprite', price: 46 },
-                { product_id: 4, category_id: 2, company_id: 1, name: 'nestie', price: 46 },
-                { product_id: 5, category_id: 2, company_id: 1, name: 'pepsi', price: 46 },
-                { product_id: 6, category_id: 2, company_id: 1, name: 'mug', price: 46 },
-            ],
+            Products:
+                [
+                    { product_id: 1, category_id: 1, company_id: 1, name: 'Burger', price: 46 },
+                    { product_id: 2, category_id: 2, company_id: 1, name: 'coke', price: 46 },
+                    { product_id: 3, category_id: 2, company_id: 1, name: 'sprite', price: 46 },
+                    { product_id: 4, category_id: 2, company_id: 1, name: 'nestie', price: 46 },
+                    { product_id: 5, category_id: 2, company_id: 1, name: 'pepsi', price: 46 },
+                    { product_id: 6, category_id: 2, company_id: 1, name: 'mug', price: 46 },
+                ]
+            ,
             Orders: [
             ],
+            CustomerName: null,
+            CustomerNumber: null,
+            CustomerAddress: null,
             FocusCategory: 1
         }
     },
@@ -31,22 +36,28 @@ export default {
             this.Orders.push({ product_id: prod_id, price: price, name: name, quantity: 1 })
 
         }
-    }
+    },
+    // mounted() {
+    //     axios.get("127.0.0.1:8000/api/product")
+    //         .then(Response => (this.Products = Response))
+    // }
 }
 </script>
 <template>
-    <div class="grid grid-cols-2">
+    <div class="grid grid-cols-2 ">
         <!-- left side current order list -->
-        <div class="border-2 mx-3 my-2">
+        <div class="border-2 mx-3 my-2 p-4">
             <div class="flex flex-row" v-for="Order in ActiveOrders()" v-bind:key="Order">
-                <div class="flex flex-col w-[93%]">
+                <div class="flex flex-col w-[93%] ">
                     <h1 class="text-2xl">{{ Order.name }}</h1>
                     <p>&#8369; {{ Order.price }} </p>
                 </div>
-                <div class=" flex m-auto test ">
-                    <button class="linkbutton " @click="Order.quantity--">-</button>
+                <div class=" grid grid-cols-3 m-auto ">
+                    <button class="linkbutton pl-[10px] pr-[13px] mx-1 py-0 rounded-full"
+                        @click="Order.quantity--">-</button>
                     <p class="text-center my-auto"> {{ Order.quantity }} </p>
-                    <button class="linkbutton" @click="Order.quantity++">+</button>
+                    <button class="linkbutton pl-[10px] pr-[13px] mx-1 py-0 rounded-full"
+                        @click="Order.quantity++">+</button>
                 </div>
             </div>
         </div>
@@ -74,14 +85,13 @@ export default {
             <!-- text input -->
             <div class="flex flex-col">
                 <label for="Cutomer Name">Customer Name:</label>
-                <input class="input" type="text" placeholder="Cutomer Name">
+                <input class="input" type="text" placeholder="Cutomer Name" v-model="CustomerName">
 
                 <label for="Customer Number">Customer Number:</label>
-                <input class="input" type="text" placeholder="Customer Number">
+                <input class="input" type="text" placeholder="Customer Number" v-model="CustomerNumber">
 
                 <label for="Customer Address">Customer Address:</label>
-                <input class="input" type="text" placeholder="Customer Address">
-
+                <input class="input" type="text" placeholder="Customer Address" v-model="CustomerAddress">
             </div>
         </div>
 
