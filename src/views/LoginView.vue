@@ -22,6 +22,7 @@ export default{
         password: this.password
       }).then((res)=>{
         store.authLogin(res.data)
+        console.log(res.data)
         this.$router.push({name: 'pos'})
       }).catch((err)=>{
         console.log(err)

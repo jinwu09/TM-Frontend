@@ -7,6 +7,7 @@ import PendingOrdersVue from '../components/pos/PendingOrders.vue'
 import ManageCategoryVue from '../components/pos/ManageCategory.vue'
 import ManageProductsVue from '../components/pos/ManageProducts.vue'
 import ManageSettingsVue from '../components/pos/ManageSettings.vue'
+import { store } from '../store'
 
 // export { ViewComponent }
 export default {
@@ -23,18 +24,23 @@ export default {
     },
     data() {
         return {
+            store,
             isSideActive: true,
             ViewComponent: 'AddOrdersVue',
-            categories: []
         }
     },
     mounted(){
-        this.$http.get('api/category/').then((res)=>{
-            this.categories = res.data
-            console.log(this.categories)
-        }).catch((err)=>{
-            console.log(err)
-        })
+        this.$http.all([
+            this.$http.get('api/category/'),
+            this.$http.get('api/order/'),
+            this.$http.get('api/product/'),
+            this.$http.get('api/invoice/')
+        ]).then(this.$http.spread((cat, ord,pro,inv)=>{
+            store.setCategories(cat.data)
+            store.setOrders(ord.data)
+            store.setProducts(pro.data)
+            store.setInvoices(inv.data)
+        }))
     }
 }
 </script>
