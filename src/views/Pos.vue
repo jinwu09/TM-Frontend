@@ -1,41 +1,26 @@
 <script >
-import { RouterLink, RouterView } from 'vue-router'
-import AddOrdersVue from '../components/pos/AddOrders.vue'
-import InvoicesVue from '../components/pos/Invoices.vue'
-import OngoingOrdersVue from '../components/pos/OngoingOrders.vue'
-import PendingOrdersVue from '../components/pos/PendingOrders.vue'
-import ManageCategoryVue from '../components/pos/ManageCategory.vue'
-import ManageProductsVue from '../components/pos/ManageProducts.vue'
-import ManageSettingsVue from '../components/pos/ManageSettings.vue'
+import { RouterLink } from 'vue-router'
+
 import { store } from '../store'
 
 // export { ViewComponent }
 export default {
     components: {
         RouterLink,
-        RouterView,
-        AddOrdersVue,
-        InvoicesVue,
-        OngoingOrdersVue,
-        PendingOrdersVue,
-        ManageCategoryVue,
-        ManageProductsVue,
-        ManageSettingsVue
     },
     data() {
         return {
             store,
             isSideActive: true,
-            ViewComponent: '',
         }
     },
-    mounted() {
+    mounted(){
         this.$http.all([
             this.$http.get('api/category/'),
             this.$http.get('api/order/'),
             this.$http.get('api/product/'),
             this.$http.get('api/invoice/')
-        ]).then(this.$http.spread((cat, ord, pro, inv) => {
+        ]).then(this.$http.spread((cat, ord,pro,inv)=>{
             store.setCategories(cat.data)
             store.setOrders(ord.data)
             store.setProducts(pro.data)
@@ -49,24 +34,23 @@ export default {
     <!-- side nav -->
     <aside class=" SideBar  " :class="{ SideActive: isSideActive, SideDisable: !isSideActive }">
         <h1 class=" SideBarIcon my-10 text-center text-white text-3xl">Today's Menu </h1>
-        <a class="linkbutton rounded-none border-0 text-white SideBarIcon" @click="ViewComponent = 'AddOrdersVue'">Add
-            Order</a>
-        <a class="linkbutton rounded-none border-0 text-white SideBarIcon"
-            @click="ViewComponent = 'PendingOrdersVue'">Pending Orders</a>
-        <a class="linkbutton rounded-none border-0 text-white SideBarIcon"
-            @click="ViewComponent = 'OngoingOrdersVue'">Ongoing Orders</a>
-        <a class="linkbutton rounded-none border-0 text-white SideBarIcon"
-            @click="ViewComponent = 'InvoicesVue'">Invoices</a>
+        <router-link class="linkbutton rounded-none border-0 text-white SideBarIcon" :to="{name: 'add-order'}">Add
+            Order</router-link>
+        <router-link class="linkbutton rounded-none border-0 text-white SideBarIcon"
+            :to="{name: 'pending-order'}">Pending Orders</router-link>
+        <router-link class="linkbutton rounded-none border-0 text-white SideBarIcon"
+            :to="{name: 'ongoing-order'}">Ongoing Orders</router-link>
+        <router-link class="linkbutton rounded-none border-0 text-white SideBarIcon"
+            :to="{name: 'invoices'}">Invoices</router-link>
         <hr class=" w-[220px] mx-[15px] ">
-        <a class="linkbutton rounded-none border-0 text-white SideBarIcon"
-            @click="ViewComponent = 'ManageProductsVue'">Manage
-            Products</a>
-        <a class="linkbutton rounded-none border-0 text-white SideBarIcon"
-            @click="ViewComponent = 'ManageCategoryVue'">Manage
-            Category</a>
-        <a class="linkbutton rounded-none border-0 text-white SideBarIcon"
-            @click="ViewComponent = 'ManageSettingsVue'">Manage
-            Settings</a>
+        <router-link class="linkbutton rounded-none border-0 text-white SideBarIcon"
+            :to="{name: 'manage-product'}">Manage
+            Products</router-link>
+        <router-link class="linkbutton rounded-none border-0 text-white SideBarIcon" :to="{name: 'manage-category'}">Manage
+            Category</router-link>
+        <router-link class="linkbutton rounded-none border-0 text-white SideBarIcon"
+            :to="{name: 'manage-settings'}">Manage
+            Settings</router-link>
     </aside>
     <div class="flex">
         <div class="flex main bg-slate-300 w-full h-16 "
@@ -83,8 +67,7 @@ export default {
         </div>
 
     </div>
-    <div class="main   " :class="{ SideActivemain: isSideActive, SideDisablemain: !isSideActive }">
-        <component v-bind:is="ViewComponent"></component>
+    <div class="main  test " :class="{ SideActivemain: isSideActive, SideDisablemain: !isSideActive }">
         <!-- <p> {{ ViewComponent }} test {{ isSideActive }} </p> -->
     </div>
 
