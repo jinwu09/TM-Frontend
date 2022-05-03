@@ -8,7 +8,7 @@ import { RouterLink, RouterView } from 'vue-router'
             <img src="../assets/Logo2.jpg" class="rounded-full" width="100" height="100">
             <h1 class="my-auto">Today's Menu</h1>
         </div>
-        <nav class=" flex ml-auto gap-5  my-auto">
+        <nav class=" flex ml-auto gap-5  my-auto ">
             <RouterLink to="/home#home" class=" linkbutton  current ">Home</RouterLink>
             <RouterLink to="/Login" class=" linkbutton current">Login</RouterLink>
             <RouterLink to="/register" class=" linkbutton current">Register</RouterLink>

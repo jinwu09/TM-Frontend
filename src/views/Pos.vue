@@ -14,13 +14,13 @@ export default {
             isSideActive: true,
         }
     },
-    mounted(){
+    mounted() {
         this.$http.all([
             this.$http.get('api/category/'),
             this.$http.get('api/order/'),
             this.$http.get('api/product/'),
             this.$http.get('api/invoice/')
-        ]).then(this.$http.spread((cat, ord,pro,inv)=>{
+        ]).then(this.$http.spread((cat, ord, pro, inv) => {
             store.setCategories(cat.data)
             store.setOrders(ord.data)
             store.setProducts(pro.data)
@@ -34,28 +34,29 @@ export default {
     <!-- side nav -->
     <aside class=" SideBar  " :class="{ SideActive: isSideActive, SideDisable: !isSideActive }">
         <h1 class=" SideBarIcon my-10 text-center text-white text-3xl">Today's Menu </h1>
-        <router-link class="linkbutton rounded-none border-0 text-white SideBarIcon" :to="{name: 'add-order'}">Add
+        <router-link class="linkbutton rounded-none border-0 text-white SideBarIcon" :to="{ name: 'add-order' }">Add
             Order</router-link>
-        <router-link class="linkbutton rounded-none border-0 text-white SideBarIcon"
-            :to="{name: 'pending-order'}">Pending Orders</router-link>
-        <router-link class="linkbutton rounded-none border-0 text-white SideBarIcon"
-            :to="{name: 'ongoing-order'}">Ongoing Orders</router-link>
-        <router-link class="linkbutton rounded-none border-0 text-white SideBarIcon"
-            :to="{name: 'invoices'}">Invoices</router-link>
+        <router-link class="linkbutton rounded-none border-0 text-white SideBarIcon" :to="{ name: 'pending-order' }">
+            Pending Orders</router-link>
+        <router-link class="linkbutton rounded-none border-0 text-white SideBarIcon" :to="{ name: 'ongoing-order' }">
+            Ongoing Orders</router-link>
+        <router-link class="linkbutton rounded-none border-0 text-white SideBarIcon" :to="{ name: 'invoices' }">Invoices
+        </router-link>
         <hr class=" w-[220px] mx-[15px] ">
-        <router-link class="linkbutton rounded-none border-0 text-white SideBarIcon"
-            :to="{name: 'manage-product'}">Manage
+        <router-link class="linkbutton rounded-none border-0 text-white SideBarIcon" :to="{ name: 'manage-product' }">
+            Manage
             Products</router-link>
-        <router-link class="linkbutton rounded-none border-0 text-white SideBarIcon" :to="{name: 'manage-category'}">Manage
+        <router-link class="linkbutton rounded-none border-0 text-white SideBarIcon" :to="{ name: 'manage-category' }">
+            Manage
             Category</router-link>
-        <router-link class="linkbutton rounded-none border-0 text-white SideBarIcon"
-            :to="{name: 'manage-settings'}">Manage
+        <router-link class="linkbutton rounded-none border-0 text-white SideBarIcon" :to="{ name: 'manage-settings' }">
+            Manage
             Settings</router-link>
     </aside>
     <div class="flex">
-        <div class="flex main bg-slate-300 w-full h-16 "
+        <div class="flex main bg-[#FBE7D3] w-full h-16 "
             :class="{ SideActivemain: isSideActive, SideDisablemain: !isSideActive }">
-            <div class="bg-slate-400  w-12 h-12 rounded-full mt-2 ml-4 flex relative">
+            <div class="bg-fourth  w-12 h-12 rounded-full mt-2 ml-4 flex relative">
                 <input type="checkbox" :checked="isSideActive" class=" hidden " id="openSidebarMenu"
                     @click="isSideActive = !isSideActive">
                 <label for="openSidebarMenu " class="sidebarIconToggle" @click="isSideActive = !isSideActive">
@@ -67,7 +68,7 @@ export default {
         </div>
 
     </div>
-    <div class="main  test " :class="{ SideActivemain: isSideActive, SideDisablemain: !isSideActive }">
+    <div class="main   " :class="{ SideActivemain: isSideActive, SideDisablemain: !isSideActive }">
         <!-- <p> {{ ViewComponent }} test {{ isSideActive }} </p> -->
     </div>
 
