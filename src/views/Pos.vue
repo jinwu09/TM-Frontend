@@ -83,7 +83,7 @@ export default {
         </div>
 
     </div>
-    <div class="main  test " :class="{ SideActivemain: isSideActive, SideDisablemain: !isSideActive }">
+    <div class="main   " :class="{ SideActivemain: isSideActive, SideDisablemain: !isSideActive }">
         <component v-bind:is="ViewComponent"></component>
         <!-- <p> {{ ViewComponent }} test {{ isSideActive }} </p> -->
     </div>

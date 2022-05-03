@@ -108,12 +108,11 @@ export default {
                 <label for="Customer Address">Customer Address:</label>
                 <input class="input" type="text" placeholder="Customer Address" v-model="CustomerAddress">
             </div>
-            <div class="linkbutton text-center ml-[55%] mt-3">
-                <button @click="Checkout">CHECKOUT</button>
-            </div>
+            <button class="linkbutton text-center ml-[55%]  mt-3 disabled:bg-fourth hover:rounded-full hover:text-black"
+                @click="Checkout">CHECKOUT</button>
         </div>
 
     </div>
-    <p> receipt {{ Receipt }} </p>
-    <p>Products{{ Products }} </p>
+    <!-- <p> receipt {{ Receipt }} </p>
+    <p>Products{{ Products }} </p> -->
 </template>
