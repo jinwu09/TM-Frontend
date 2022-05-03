@@ -26,16 +26,16 @@ export default {
         return {
             store,
             isSideActive: true,
-            ViewComponent: 'AddOrdersVue',
+            ViewComponent: '',
         }
     },
-    mounted(){
+    mounted() {
         this.$http.all([
             this.$http.get('api/category/'),
             this.$http.get('api/order/'),
             this.$http.get('api/product/'),
             this.$http.get('api/invoice/')
-        ]).then(this.$http.spread((cat, ord,pro,inv)=>{
+        ]).then(this.$http.spread((cat, ord, pro, inv) => {
             store.setCategories(cat.data)
             store.setOrders(ord.data)
             store.setProducts(pro.data)
