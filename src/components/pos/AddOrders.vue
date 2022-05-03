@@ -2,22 +2,10 @@
 export default {
     data() {
         return {
-            Categorys: [
-                { category_id: 1, company_id: 1, name: 'Food' },
-                { category_id: 2, company_id: 1, name: 'Drinks' },
-            ],
-            Products:
-                [
-                    { product_id: 1, category_id: 1, company_id: 1, name: 'Burger', price: 46 },
-                    { product_id: 2, category_id: 2, company_id: 1, name: 'coke', price: 46 },
-                    { product_id: 3, category_id: 2, company_id: 1, name: 'sprite', price: 46 },
-                    { product_id: 4, category_id: 2, company_id: 1, name: 'nestie', price: 46 },
-                    { product_id: 5, category_id: 2, company_id: 1, name: 'pepsi', price: 46 },
-                    { product_id: 6, category_id: 2, company_id: 1, name: 'mug', price: 46 },
-                ]
-            ,
-            Orders: [
-            ],
+            Categorys: [],
+            Products: [],
+            Orders: [],
+            Receipt: [],
             CustomerName: null,
             CustomerNumber: null,
             CustomerAddress: null,
@@ -35,30 +23,65 @@ export default {
 
             this.Orders.push({ product_id: prod_id, price: price, name: name, quantity: 1 })
 
+        },
+        Total() {
+            var total = 0
+            for (let index = 0; index < this.ActiveOrders().length; index++) {
+                total = total + (this.ActiveOrders()[index].price * this.ActiveOrders()[index].quantity);
+
+            }
+            return total
+        },
+        Checkout() {
+            this.Receipt.push({})
         }
     },
-    // mounted() {
-    //     axios.get("127.0.0.1:8000/api/product")
-    //         .then(Response => (this.Products = Response))
-    // }
+    mounted() {
+        this.$http.get('api/category/').then((res) => {
+            this.Categorys = res.data
+            console.log(this.Categorys)
+        }).catch((err) => {
+            console.log(err)
+        }),
+            this.$http.get('api/product/').then((res) => {
+                this.Products = res.data
+                console.log(this.Products)
+            }).catch((err) => {
+                console.log(err)
+            })
+    }
 }
 </script>
 <template>
     <div class="grid grid-cols-2 ">
         <!-- left side current order list -->
         <div class="border-2 mx-3 my-2 p-4">
-            <div class="flex flex-row" v-for="Order in ActiveOrders()" v-bind:key="Order">
-                <div class="flex flex-col w-[93%] ">
-                    <h1 class="text-2xl">{{ Order.name }}</h1>
-                    <p>&#8369; {{ Order.price }} </p>
+            <!-- object product -->
+            <div class="min-h-[80%] ">
+                <div class="flex flex-row" v-for="Order in ActiveOrders()" v-bind:key="Order">
+                    <div class="flex flex-col w-[93%] ">
+                        <h1 class="text-2xl">{{ Order.name }}</h1>
+                        <p> </p>
+                        <div class="flex gap-3">
+                            <p>&#8369; {{ Order.price }} </p>
+                            <div class="flex gap-3" v-if="Order.quantity > 1">
+                                <p>|</p>
+                                <p>&#8369; {{ Order.price * Order.quantity }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class=" grid grid-cols-3 m-auto ">
+                        <button class="linkbutton pl-[10px] pr-[13px] mx-1 py-0 rounded-full"
+                            @click="Order.quantity--">-</button>
+                        <p class="text-center my-auto"> {{ Order.quantity }} </p>
+                        <button class="linkbutton pl-[10px] pr-[13px] mx-1 py-0 rounded-full"
+                            @click="Order.quantity++">+</button>
+                    </div>
                 </div>
-                <div class=" grid grid-cols-3 m-auto ">
-                    <button class="linkbutton pl-[10px] pr-[13px] mx-1 py-0 rounded-full"
-                        @click="Order.quantity--">-</button>
-                    <p class="text-center my-auto"> {{ Order.quantity }} </p>
-                    <button class="linkbutton pl-[10px] pr-[13px] mx-1 py-0 rounded-full"
-                        @click="Order.quantity++">+</button>
-                </div>
+            </div>
+            <!-- Total -->
+            <div>
+                <p> Total: &#8369; {{ Total() }} </p>
             </div>
         </div>
         <!-- right side -->
@@ -93,7 +116,11 @@ export default {
                 <label for="Customer Address">Customer Address:</label>
                 <input class="input" type="text" placeholder="Customer Address" v-model="CustomerAddress">
             </div>
+            <div class="linkbutton text-center ml-[55%] mt-3">
+                <button @click="Checkout">CHECKOUT</button>
+            </div>
         </div>
 
     </div>
+    <p> {{ Receipt }} </p>
 </template>

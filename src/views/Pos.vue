@@ -8,7 +8,6 @@ import ManageCategoryVue from '../components/pos/ManageCategory.vue'
 import ManageProductsVue from '../components/pos/ManageProducts.vue'
 import ManageSettingsVue from '../components/pos/ManageSettings.vue'
 
-// export { ViewComponent }
 export default {
     components: {
         RouterLink,
@@ -28,14 +27,7 @@ export default {
             categories: []
         }
     },
-    mounted(){
-        this.$http.get('api/category/').then((res)=>{
-            this.categories = res.data
-            console.log(this.categories)
-        }).catch((err)=>{
-            console.log(err)
-        })
-    }
+
 }
 </script>
 
@@ -43,22 +35,28 @@ export default {
     <!-- side nav -->
     <aside class=" SideBar  " :class="{ SideActive: isSideActive, SideDisable: !isSideActive }">
         <h1 class=" SideBarIcon my-10 text-center text-white text-3xl">Today's Menu </h1>
-        <a class="linkbutton rounded-none border-0 text-white SideBarIcon" @click="ViewComponent = 'AddOrdersVue'">Add
+        <a class="linkbutton rounded-none border-0 text-white SideBarIcon"
+            :class="{ Active: ViewComponent == 'AddOrdersVue' }" @click="ViewComponent = 'AddOrdersVue'">Add
             Order</a>
         <a class="linkbutton rounded-none border-0 text-white SideBarIcon"
-            @click="ViewComponent = 'PendingOrdersVue'">Pending Orders</a>
+            :class="{ Active: ViewComponent == 'PendingOrdersVue' }" @click="ViewComponent = 'PendingOrdersVue'">Pending
+            Orders</a>
         <a class="linkbutton rounded-none border-0 text-white SideBarIcon"
-            @click="ViewComponent = 'OngoingOrdersVue'">Ongoing Orders</a>
+            :class="{ Active: ViewComponent == 'OngoingOrdersVue' }" @click="ViewComponent = 'OngoingOrdersVue'">Ongoing
+            Orders</a>
         <a class="linkbutton rounded-none border-0 text-white SideBarIcon"
-            @click="ViewComponent = 'InvoicesVue'">Invoices</a>
+            :class="{ Active: ViewComponent == 'InvoicesVue' }" @click="ViewComponent = 'InvoicesVue'">Invoices</a>
         <hr class=" w-[220px] mx-[15px] ">
         <a class="linkbutton rounded-none border-0 text-white SideBarIcon"
+            :class="{ Active: ViewComponent == 'ManageProductsVue' }"
             @click="ViewComponent = 'ManageProductsVue'">Manage
             Products</a>
         <a class="linkbutton rounded-none border-0 text-white SideBarIcon"
+            :class="{ Active: ViewComponent == 'ManageCategoryVue' }"
             @click="ViewComponent = 'ManageCategoryVue'">Manage
             Category</a>
         <a class="linkbutton rounded-none border-0 text-white SideBarIcon"
+            :class="{ Active: ViewComponent == 'ManageSettingsVue' }"
             @click="ViewComponent = 'ManageSettingsVue'">Manage
             Settings</a>
     </aside>
@@ -79,7 +77,8 @@ export default {
     </div>
     <div class="main  " :class="{ SideActivemain: isSideActive, SideDisablemain: !isSideActive }">
         <component v-bind:is="ViewComponent"></component>
-        <!-- <p> {{ ViewComponent }} test {{ isSideActive }} </p> -->
+        <router-link to="/home" replace>asd</router-link>
+        <!-- <p> {{ ViewComponent }} </p> -->
     </div>
 
 </template>
