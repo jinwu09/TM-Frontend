@@ -1,7 +1,6 @@
 <script>
 import { RouterLink, RouterView } from 'vue-router'
 import NavBarHomeVue from '../components/NavBarHome.vue'
-import axios from 'axios'
 import { store } from '../store'
 export default{
   components:{
@@ -18,14 +17,14 @@ export default{
   },
   methods:{
     login(){
-      axios.post("http://127.0.0.1:8000/api/auth/token/login/",{
+      this.$http.post("api/auth/token/login/",{
         username: this.username,
         password: this.password
       }).then((res)=>{
         store.authLogin(res.data)
         this.$router.push({name: 'pos'})
       }).catch((err)=>{
-        console.log(err.data)
+        console.log(err)
       })
     }
   }
