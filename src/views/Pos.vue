@@ -24,8 +24,17 @@ export default {
     data() {
         return {
             isSideActive: true,
-            ViewComponent: 'AddOrdersVue'
+            ViewComponent: 'AddOrdersVue',
+            categories: []
         }
+    },
+    mounted(){
+        this.$http.get('api/category/').then((res)=>{
+            this.categories = res.data
+            console.log(this.categories)
+        }).catch((err)=>{
+            console.log(err)
+        })
     }
 }
 </script>
