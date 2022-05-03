@@ -1,7 +1,9 @@
 <script >
+import { store } from "../../store"
 export default {
     data() {
         return {
+            store,
             Categorys: [],
             Products: [],
             Orders: [],
@@ -37,18 +39,8 @@ export default {
         }
     },
     mounted() {
-        this.$http.get('api/category/').then((res) => {
-            this.Categorys = res.data
-            console.log(this.Categorys)
-        }).catch((err) => {
-            console.log(err)
-        }),
-            this.$http.get('api/product/').then((res) => {
-                this.Products = res.data
-                console.log(this.Products)
-            }).catch((err) => {
-                console.log(err)
-            })
+        this.Categorys = store.getCategories()
+        this.Products = store.getProducts()
     }
 }
 </script>
@@ -122,5 +114,6 @@ export default {
         </div>
 
     </div>
-    <p> {{ Receipt }} </p>
+    <p> receipt {{ Receipt }} </p>
+    <p>Products{{ Products }} </p>
 </template>
