@@ -23,7 +23,7 @@ export default {
 </script>
 <template>
     <!-- side nav -->
-    <aside class=" SideBar  " :class="{ SideActive: isSideActive, SideDisable: !isSideActive }">
+    <aside class=" SideBar  auto-cols-min " :class="{ SideActive: isSideActive, SideDisable: !isSideActive }">
         <h1 class=" SideBarIcon my-10 text-center text-white text-3xl">Today's Menu </h1>
         <router-link class="linkbutton rounded-none border-0 text-white SideBarIcon" :to="{ name: 'add-order' }">Add
             Order</router-link>

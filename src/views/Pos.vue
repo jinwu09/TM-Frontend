@@ -68,7 +68,7 @@ export default {
         </div>
 
     </div>
-    <div class="main   " :class="{ SideActivemain: isSideActive, SideDisablemain: !isSideActive }">
+    <div class="main  " :class="{ SideActivemain: isSideActive, SideDisablemain: !isSideActive }">
         <!-- <p> {{ ViewComponent }} test {{ isSideActive }} </p> -->
     </div>
 
