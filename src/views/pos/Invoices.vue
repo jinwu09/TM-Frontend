@@ -11,8 +11,13 @@ export default {
         }
     },
     mounted() {
-        this.Products = store.getProducts()
-        this.Orders = store.getOrders()
+        this.$http.all([
+            this.$http.get('api/order/?company_id='+store.getCompany().company_id),
+            this.$http.get('api/product/?company_id='+store.getCompany().company_id),
+        ]).then(this.$http.spread((ord,prod)=>{
+            this.Orders = ord.data
+            this.Products = prod.data
+        }))
     },
     methods: {
         showproduct(id) {

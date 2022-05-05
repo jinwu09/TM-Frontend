@@ -15,17 +15,18 @@ export default {
         }
     },
     mounted() {
-        this.$http.all([
-            this.$http.get('api/category/'),
-            this.$http.get('api/order/'),
-            this.$http.get('api/product/'),
-            this.$http.get('api/invoice/')
-        ]).then(this.$http.spread((cat, ord, pro, inv) => {
-            store.setCategories(cat.data)
-            store.setOrders(ord.data)
-            store.setProducts(pro.data)
-            store.setInvoices(inv.data)
-        }))
+        this.$http.get('api/auth/users/me').then((res)=>{
+                store.setMe(res.data)
+                this.$http.get('api/company/?user='+store.getMe().id).then((res)=>{
+                    store.setCompany(res.data[0])
+                }).catch((err)=>{
+                    console.log(err)
+                })
+            }
+        ).catch((err)=>{
+            console.log(err)
+        })
+        
     }
 }
 </script>

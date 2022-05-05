@@ -4,11 +4,24 @@ import {reactive} from 'vue';
 export const store = reactive({
     isAuthenticated : false,
     token: null,
+    user:null,
+    company: null,
     categories: [],
     orders:[],
     invoices:[],
     products: [],
-
+    setMe(me){
+        this.user = me
+    },
+    getMe(){
+        return this.user
+    },
+    setCompany(company){
+        this.company = company
+    },
+    getCompany(){
+        return this.company
+    },
     setCategories(categories){
         this.categories = categories
     },
