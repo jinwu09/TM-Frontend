@@ -10,15 +10,39 @@ export default {
         }
     },
     mounted() {
-        this.Products = store.getProducts()
-        this.Orders = store.getOrders()
-    },
-    computed() {
+        this.$http.all([
+            this.$http.get('api/order/?company_id='+store.getCompany().company_id),
+            this.$http.get('api/product/?company_id='+store.getCompany().company_id),
+        ]).then(this.$http.spread((ord,prod)=>{
+            this.Orders = ord.data
+            this.Products = prod.data
+        }))
     },
     methods: {
         showproduct(id) {
             return this.Products.filter(Products => Products.product_id == id)
         },
+        popOrder(order_id){
+            return this.Orders.filter(order => order.order_id !== order_id)
+        },
+        delOrder(order_id){
+            this.$http.delete('api/order/'+order_id+'/')
+            .then((res)=>{
+                this.Orders = this.popOrder(order_id)
+            }).catch((err)=>{
+                console.log(err)
+            })
+        },
+        procOrder(order_id){
+            this.$http.patch('api/order/'+order_id+'/',{
+                status: "O"
+            })
+            .then((res)=>{
+                this.Orders = this.popOrder(order_id)
+            }).catch((err)=>{
+                console.log(err)
+            })
+        }
     }
 }
 </script>
@@ -74,8 +98,8 @@ export default {
                     <p> {{ Prod.quantity }} </p>
                 </div>
                 <div class=" text-center  mt-5">
-                    <button class="linkbutton border-0 text-white bg-fifth ">DELETE</button>
-                    <button class="linkbutton border-0 text-white bg-primary ml-10">PROCEED</button>
+                    <button class="linkbutton border-0 text-white bg-fifth" @click="delOrder(Order.order_id)">DELETE</button>
+                    <button class="linkbutton border-0 text-white bg-primary ml-10" @click="procOrder(Order.order_id)">PROCEED</button>
                 </div>
             </div>
         </div>

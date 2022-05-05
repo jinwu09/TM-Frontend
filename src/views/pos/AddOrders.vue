@@ -7,12 +7,12 @@ export default {
             Categorys: [],
             Products: [],
             Orders: [],
-            Receipt: [],
             CustomerName: null,
             CustomerNumber: null,
             CustomerAddress: null,
             FocusCategory: 1,
             isSideActive: true,
+                
         }
     },
     methods: {
@@ -23,11 +23,11 @@ export default {
             return this.Orders.filter(Orders => Orders.quantity > 0)
         },
         addOrder(prod_id, price, name) {
-
+            
             this.Orders.push({ product_id: prod_id, price: price, name: name, quantity: 1 })
 
         },
-        Total() {
+        Total(){
             var total = 0
             for (let index = 0; index < this.ActiveOrders().length; index++) {
                 total = total + (this.ActiveOrders()[index].price * this.ActiveOrders()[index].quantity);
@@ -35,13 +35,32 @@ export default {
             }
             return total
         },
-        Checkout() {
-            this.Receipt.push({})
+        Checkout(){
+            this.$http.post('api/order/',{
+                company_id: store.getCompany().company_id,
+                order_detail_id:this.Orders,
+                customer_name: this.CustomerName,
+                customer_number: this.CustomerNumber,
+                customer_address: this.CustomerAddress,
+                status: "P"
+            }).then((res)=>{
+                this.CustomerName = null
+                this.CustomerAddress = null
+                this.CustomerNumber = null
+                this.Orders = []
+            }).catch((err)=>{
+                console.log(err)
+            })
         }
     },
     mounted() {
-        this.Categorys = store.getCategories()
-        this.Products = store.getProducts()
+        this.$http.all([
+            this.$http.get('api/category/?company_id='+store.getCompany().company_id),
+            this.$http.get('api/product/?company_id='+store.getCompany().company_id),
+        ]).then(this.$http.spread((cat,prod)=>{
+            this.Categorys = cat.data
+            this.Products = prod.data
+        }))
     }
 }
 </script>
