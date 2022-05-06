@@ -5,6 +5,7 @@ import HomeView from '../views/HomeView.vue'
 import LoginView from '../views/LoginView.vue'
 import RegisterView from '../views/RegisterView.vue'
 import PosVue from '../views/Pos.vue'
+import testVue from '../views/test.vue'
 import AddOrdersVue from '../views/pos/AddOrders.vue'
 import InvoicesVue from '../views/pos/Invoices.vue'
 import ManageCategoryVue from '../views/pos/ManageCategory.vue'
@@ -114,6 +115,14 @@ const router = createRouter({
       path: '/login',
       name: 'login',
       component: LoginView,
+      meta:{
+        needAuth: false
+      }
+    },
+    {
+      path: '/test',
+      name: 'test',
+      component: testVue,
       meta:{
         needAuth: false
       }
