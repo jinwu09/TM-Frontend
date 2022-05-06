@@ -51,7 +51,7 @@ export default {
 
 <style scoped>
 
-    @import url('https://fonts.googleapis.com/css2?family=Anton&family=Dosis&family=Josefin+Sans&family=Poppins:wght@700&display=swap');
+    
 
     hr{
         border: none;

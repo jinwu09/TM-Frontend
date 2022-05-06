@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 @layer components{
+    
 
     .test{
         @apply border-2 border-solid border-black
