@@ -2,10 +2,10 @@
 import { store } from "../../store"
 import SideNav from "../../components/SideNav.vue"
 export default {
-    components:{
+    components: {
         SideNav
     },
-    
+
     data() {
         return {
             store,
@@ -17,11 +17,11 @@ export default {
             CustomerAddress: null,
             FocusCategory: 1,
             isSideActive: Boolean,
-                
+
         }
     },
     methods: {
-        change(e){
+        change(e) {
             this.isSideActive = e
         },
         showproduct(category) {
@@ -31,11 +31,11 @@ export default {
             return this.Orders.filter(Orders => Orders.quantity > 0)
         },
         addOrder(prod_id, price, name) {
-            
+
             this.Orders.push({ product_id: prod_id, price: price, name: name, quantity: 1 })
 
         },
-        Total(){
+        Total() {
             var total = 0
             for (let index = 0; index < this.ActiveOrders().length; index++) {
                 total = total + (this.ActiveOrders()[index].price * this.ActiveOrders()[index].quantity);
@@ -43,29 +43,29 @@ export default {
             }
             return total
         },
-        Checkout(){
-            this.$http.post('api/order/',{
+        Checkout() {
+            this.$http.post('api/order/', {
                 company_id: store.getCompany().company_id,
-                order_detail_id:this.Orders,
+                order_detail_id: this.Orders,
                 customer_name: this.CustomerName,
                 customer_number: this.CustomerNumber,
                 customer_address: this.CustomerAddress,
                 status: "P"
-            }).then((res)=>{
+            }).then((res) => {
                 this.CustomerName = null
                 this.CustomerAddress = null
                 this.CustomerNumber = null
                 this.Orders = []
-            }).catch((err)=>{
+            }).catch((err) => {
                 console.log(err)
             })
         }
     },
     mounted() {
         this.$http.all([
-            this.$http.get('api/category/?company_id='+store.getCompany().company_id),
-            this.$http.get('api/product/?company_id='+store.getCompany().company_id),
-        ]).then(this.$http.spread((cat,prod)=>{
+            this.$http.get('api/category/?company_id=' + store.getCompany().company_id),
+            this.$http.get('api/product/?company_id=' + store.getCompany().company_id),
+        ]).then(this.$http.spread((cat, prod) => {
             this.Categorys = cat.data
             this.Products = prod.data
         }))
@@ -73,7 +73,7 @@ export default {
 }
 </script>
 <template>
-    <SideNav @changedSide="change"/>
+    <SideNav @changedSide="change" />
     <div class="main   " :class="{ SideActivemain: isSideActive, SideDisablemain: !isSideActive }">
         <div class="grid grid-cols-2 ">
             <!-- left side current order list -->

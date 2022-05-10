@@ -1,14 +1,23 @@
 <script>
+import router from "../router"
+import { store } from "../store"
 export default {
-    emits:['changedSide'],
+    emits: ['changedSide'],
     data() {
         return {
+            store,
             isSideActive: true
         }
     },
-    watch:{
-        isSideActive(){
-            this.$emit('changedSide',this.isSideActive)
+    watch: {
+        isSideActive() {
+            this.$emit('changedSide', this.isSideActive)
+        }
+    },
+    methods: {
+        logout() {
+            this.store.authLogout()
+            this.$router.push('/home')
         }
     }
 }
@@ -37,9 +46,9 @@ export default {
             Settings</router-link>
     </aside>
     <!-- nav button -->
-    <div class="flex">
-        <div class="flex main bg-[#FBE7D3] w-full h-16 "
-            :class="{ SideActivemain: isSideActive, SideDisablemain: !isSideActive }">
+    <div class="flex bg-[#FBE7D3]">
+        <!-- button for sidenav -->
+        <div class="flex main   h-16 " :class="{ SideActivemain: isSideActive, SideDisablemain: !isSideActive }">
             <div class="bg-fourth  w-12 h-12 rounded-full mt-2 ml-4 flex relative">
                 <input type="checkbox" :checked="isSideActive" class=" hidden " id="openSidebarMenu"
                     @click="isSideActive = !isSideActive">
@@ -50,7 +59,79 @@ export default {
                 </label>
             </div>
         </div>
+        <div class=" pt-2 mr-8 ml-auto">
+            <button class="linkbutton  bg-secondary text-white" @click="logout()">Log Out</button>
+        </div>
     </div>
-    
+
 
 </template>
+<style>
+.sidebarIconToggle {
+    transition: all 0.3s;
+    box-sizing: border-box;
+    cursor: pointer;
+    position: absolute;
+    z-index: 99;
+    height: 100%;
+    width: 100%;
+    top: 22px;
+    left: 15px;
+    height: 22px;
+    width: 22px;
+}
+
+.spinner {
+    right: 2.5px;
+    bottom: 7.5px;
+    transition: all 0.3s;
+    box-sizing: border-box;
+    position: absolute;
+    height: 3px;
+    width: 100%;
+    background-color: black;
+}
+
+.horizontal {
+    transition: all 0.3s;
+    box-sizing: border-box;
+    position: relative;
+    float: left;
+    margin-top: 3px;
+}
+
+.diagonal.part-1 {
+    position: relative;
+    transition: all 0.3s;
+    box-sizing: border-box;
+    float: left;
+}
+
+.diagonal.part-2 {
+    transition: all 0.3s;
+    box-sizing: border-box;
+    position: relative;
+    float: left;
+    margin-top: 3px;
+}
+
+input[type=checkbox]:checked~.sidebarIconToggle>.horizontal {
+    transition: all 0.3s;
+    box-sizing: border-box;
+    opacity: 0;
+}
+
+input[type=checkbox]:checked~.sidebarIconToggle>.diagonal.part-1 {
+    transition: all 0.3s;
+    box-sizing: border-box;
+    transform: rotate(135deg);
+    margin-top: 8px;
+}
+
+input[type=checkbox]:checked~.sidebarIconToggle>.diagonal.part-2 {
+    transition: all 0.3s;
+    box-sizing: border-box;
+    transform: rotate(-135deg);
+    margin-top: -9px;
+}
+</style>
