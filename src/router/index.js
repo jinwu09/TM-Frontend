@@ -142,7 +142,7 @@ router.beforeEach((to, from, next)=>{
   if(store.isAuthenticated && !to.meta.needAuth){
     next({name: 'login'})
   }else if(!store.isAuthenticated && to.meta.needAuth){
-    next({name: 'pos'})
+    next({name: 'login'})
   }else{
     next()
   }

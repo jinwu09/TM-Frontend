@@ -43,6 +43,9 @@
     .Active{
         @apply  bg-third rounded-xl !important
     }
+    .disable{
+        @apply hidden 
+    }
         /* Toggle Feature End  */
 
     .main{
